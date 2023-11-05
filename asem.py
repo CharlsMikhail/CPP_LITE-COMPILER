@@ -2,7 +2,14 @@ from numpy import number
 from prettytable import PrettyTable
 import asin
 
+# Regla de inferencia de tipos:
 
+reglasInferencia = {
+  "int": ["float"],
+  "float": ["int"],
+  "bool": ["int"],
+  "str": ["int"]
+}
 class node_scope_stack:
 
   def __init__(self, type, name, scope, flag):

@@ -18,6 +18,7 @@ class node_tree:
     self.id = id
     self.symbol = symbol
     self.lexeme = lexeme
+    self.type = None
     self.children = []
     self.father = None
 
@@ -56,6 +57,16 @@ def asin():
     if symbol_stack == symbol_input:
       nodeCurrent = buscar_nodo_por_id(rootp, stack[-1].id)
       nodeCurrent.lexeme = input_data4[0]["lexeme"]
+      if input_data4[0]["symbol"] == 'NUM':
+        nodeCurrent.type = 'it'
+      elif input_data4[0]["symbol"] == 'LITERAL':
+        nodeCurrent.type = 'str'
+      elif input_data4[0]["symbol"] == 'DOUBLE':
+        nodeCurrent.type = 'dbl'
+      elif input_data4[0]["symbol"] == 'CHAR':
+        nodeCurrent.type = 'ch'
+      elif input_data4[0]["symbol"] == ('BOOL_V' or 'BOOL_F'):
+        nodeCurrent.type = 'bl'
       stack.pop()
       input_data4.pop(0)
     else:
@@ -102,11 +113,11 @@ def asin():
       if padre is not None:
         if len(node.children) == 0:
           archivo.write(
-              f"{node.id} [style = filled fillcolor= yellow label = <{node.symbol}<BR/>'{node.lexeme}'>]\n"
+              f"{node.id} [style = filled fillcolor= yellow label = <Symbol: {node.symbol}<BR/>Lexeme: '{node.lexeme}'<BR/>DataType: '{node.type}'>]\n"
           )
         if padre.id not in padres_impresos:
           archivo.write(
-              f"{padre.id} [style = filled fillcolor= gray label = <{padre.symbol}<BR/>'{padre.lexeme}'>]\n"
+              f"{padre.id} [style = filled fillcolor= gray label = <Symbol: {padre.symbol}<BR/>Lexeme: '{padre.lexeme}'<BR/>DataType: '{padre.type}'>]\n"
           )
           padres_impresos.append(padre.id)
         archivo.write(f"{padre.id} -> {node.id}\n")
