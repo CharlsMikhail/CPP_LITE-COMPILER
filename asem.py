@@ -284,6 +284,6 @@ reconocerFunciones(rootP)
 
 separador = "-" * 60
 print(separador)
-print("Test Analizador Semantico: Passed :) -> por el momento")
+print("Test Analizador Semantico: Passed :)")
 printStack()
 print(separador)
