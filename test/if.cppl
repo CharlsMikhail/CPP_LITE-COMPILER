@@ -1,0 +1,25 @@
+bl esmenor10(it a) {
+  bl juicio;
+  if (a != 10) {
+    juicio = tru;
+  }
+  rtn tru;
+}
+it esmenor10(it a) {
+  bl juicio;
+  if (a != 10) {
+    juicio = tru;
+  }
+  rtn tru;
+}
+run () {
+  it a;
+  it result;
+  out("Ingrese el valor de a: ")slt;
+  iut(a);
+  result = esmenor10(a);
+  if (result == a) {
+    out("si es");
+  }
+  rtn 0;
+}

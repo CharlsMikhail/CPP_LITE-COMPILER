@@ -1,0 +1,14 @@
+vd suma(it a, it b) {
+  it resultado = a + b;
+  out(resultado);
+}
+run () {
+  int a;
+  int b;
+  out("Ingrese el valor de a: ")slt;
+  iut(a);
+  out("Ingrese el valor de b: ")slt;
+  iut(b);
+  suma(a, b);
+  rtn 0;
+}

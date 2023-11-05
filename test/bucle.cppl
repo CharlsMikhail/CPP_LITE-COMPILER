@@ -1,0 +1,25 @@
+vd suma(it a, it b) {
+  it resultado = a + b;
+  fr(it i = 0; i == 10; i = i + 1) {
+    resultado = resultado + i;
+  }
+  out(resultado);
+}
+run () {
+  it a;
+  it b;
+  out("Ingrese el valor de a: ")slt;
+  iut(a);
+  out("Ingrese el valor de b: ")slt;
+  iut(b);
+  bl x = suma(a, b);
+  rtn 0;
+}
+
+dbl aea(it a) {
+  it juicio;
+  if (a != 10) {
+    juicio = tru;
+  }
+  rtn juicio;
+}

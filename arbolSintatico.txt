@@ -1,0 +1,177 @@
+digraph G {
+13 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+12 [style = filled fillcolor= gray label = <FUNC<BR/>'None'>]
+12 -> 13
+1 [style = filled fillcolor= gray label = <STAR<BR/>'None'>]
+1 -> 12
+11 [style = filled fillcolor= yellow label = <MAIN<BR/>'run'>]
+1 -> 11
+10 [style = filled fillcolor= yellow label = <PAR_LEFT<BR/>'('>]
+1 -> 10
+9 [style = filled fillcolor= yellow label = <PAR_RIGHT<BR/>')'>]
+1 -> 9
+8 [style = filled fillcolor= yellow label = <LLA_LEFT<BR/>'{'>]
+1 -> 8
+20 [style = filled fillcolor= yellow label = <TYPE_INT<BR/>'it'>]
+19 [style = filled fillcolor= gray label = <TYPE_ID<BR/>'None'>]
+19 -> 20
+16 [style = filled fillcolor= gray label = <STATEMENT<BR/>'None'>]
+16 -> 19
+18 [style = filled fillcolor= yellow label = <ID<BR/>'a'>]
+16 -> 18
+22 [style = filled fillcolor= yellow label = <OPER_ASG<BR/>'='>]
+17 [style = filled fillcolor= gray label = <ASSIGN_VAR<BR/>'None'>]
+17 -> 22
+27 [style = filled fillcolor= yellow label = <NUM<BR/>'1'>]
+26 [style = filled fillcolor= gray label = <ARG<BR/>'None'>]
+26 -> 27
+24 [style = filled fillcolor= gray label = <ARG_BRIGE<BR/>'None'>]
+24 -> 26
+28 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+25 [style = filled fillcolor= gray label = <OPER_TIER_2<BR/>'None'>]
+25 -> 28
+24 -> 25
+21 [style = filled fillcolor= gray label = <CALCULATOR<BR/>'None'>]
+21 -> 24
+31 [style = filled fillcolor= yellow label = <OPE_SUM<BR/>'+'>]
+23 [style = filled fillcolor= gray label = <OPER_TIER_1<BR/>'None'>]
+23 -> 31
+34 [style = filled fillcolor= yellow label = <NUM<BR/>'2'>]
+33 [style = filled fillcolor= gray label = <ARG<BR/>'None'>]
+33 -> 34
+30 [style = filled fillcolor= gray label = <ARG_BRIGE<BR/>'None'>]
+30 -> 33
+35 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+32 [style = filled fillcolor= gray label = <OPER_TIER_2<BR/>'None'>]
+32 -> 35
+30 -> 32
+23 -> 30
+36 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+29 [style = filled fillcolor= gray label = <OPER_TIER_1<BR/>'None'>]
+29 -> 36
+23 -> 29
+21 -> 23
+17 -> 21
+16 -> 17
+7 [style = filled fillcolor= gray label = <SENTENCE<BR/>'None'>]
+7 -> 16
+15 [style = filled fillcolor= yellow label = <P_COMMA<BR/>';'>]
+7 -> 15
+43 [style = filled fillcolor= yellow label = <TYPE_INT<BR/>'it'>]
+42 [style = filled fillcolor= gray label = <TYPE_ID<BR/>'None'>]
+42 -> 43
+39 [style = filled fillcolor= gray label = <STATEMENT<BR/>'None'>]
+39 -> 42
+41 [style = filled fillcolor= yellow label = <ID<BR/>'b'>]
+39 -> 41
+45 [style = filled fillcolor= yellow label = <OPER_ASG<BR/>'='>]
+40 [style = filled fillcolor= gray label = <ASSIGN_VAR<BR/>'None'>]
+40 -> 45
+50 [style = filled fillcolor= yellow label = <NUM<BR/>'1'>]
+49 [style = filled fillcolor= gray label = <ARG<BR/>'None'>]
+49 -> 50
+47 [style = filled fillcolor= gray label = <ARG_BRIGE<BR/>'None'>]
+47 -> 49
+51 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+48 [style = filled fillcolor= gray label = <OPER_TIER_2<BR/>'None'>]
+48 -> 51
+47 -> 48
+44 [style = filled fillcolor= gray label = <CALCULATOR<BR/>'None'>]
+44 -> 47
+52 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+46 [style = filled fillcolor= gray label = <OPER_TIER_1<BR/>'None'>]
+46 -> 52
+44 -> 46
+40 -> 44
+39 -> 40
+14 [style = filled fillcolor= gray label = <SENTENCE<BR/>'None'>]
+14 -> 39
+38 [style = filled fillcolor= yellow label = <P_COMMA<BR/>';'>]
+14 -> 38
+57 [style = filled fillcolor= yellow label = <ID<BR/>'a'>]
+55 [style = filled fillcolor= gray label = <STATEMENT<BR/>'None'>]
+55 -> 57
+59 [style = filled fillcolor= yellow label = <OPER_ASG<BR/>'='>]
+56 [style = filled fillcolor= gray label = <FUNC_OR_EQUAL<BR/>'None'>]
+56 -> 59
+64 [style = filled fillcolor= yellow label = <NUM<BR/>'2'>]
+63 [style = filled fillcolor= gray label = <ARG<BR/>'None'>]
+63 -> 64
+61 [style = filled fillcolor= gray label = <ARG_BRIGE<BR/>'None'>]
+61 -> 63
+67 [style = filled fillcolor= yellow label = <OPE_MUL<BR/>'*'>]
+62 [style = filled fillcolor= gray label = <OPER_TIER_2<BR/>'None'>]
+62 -> 67
+70 [style = filled fillcolor= yellow label = <PAR_LEFT<BR/>'('>]
+66 [style = filled fillcolor= gray label = <ARG<BR/>'None'>]
+66 -> 70
+76 [style = filled fillcolor= yellow label = <ID<BR/>'b'>]
+74 [style = filled fillcolor= gray label = <ARG<BR/>'None'>]
+74 -> 76
+77 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+75 [style = filled fillcolor= gray label = <INVOKER_FUNC<BR/>'None'>]
+75 -> 77
+74 -> 75
+72 [style = filled fillcolor= gray label = <ARG_BRIGE<BR/>'None'>]
+72 -> 74
+78 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+73 [style = filled fillcolor= gray label = <OPER_TIER_2<BR/>'None'>]
+73 -> 78
+72 -> 73
+69 [style = filled fillcolor= gray label = <CALCULATOR<BR/>'None'>]
+69 -> 72
+81 [style = filled fillcolor= yellow label = <OPE_RES<BR/>'-'>]
+71 [style = filled fillcolor= gray label = <OPER_TIER_1<BR/>'None'>]
+71 -> 81
+84 [style = filled fillcolor= yellow label = <NUM<BR/>'13'>]
+83 [style = filled fillcolor= gray label = <ARG<BR/>'None'>]
+83 -> 84
+80 [style = filled fillcolor= gray label = <ARG_BRIGE<BR/>'None'>]
+80 -> 83
+85 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+82 [style = filled fillcolor= gray label = <OPER_TIER_2<BR/>'None'>]
+82 -> 85
+80 -> 82
+71 -> 80
+86 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+79 [style = filled fillcolor= gray label = <OPER_TIER_1<BR/>'None'>]
+79 -> 86
+71 -> 79
+69 -> 71
+66 -> 69
+68 [style = filled fillcolor= yellow label = <PAR_RIGHT<BR/>')'>]
+66 -> 68
+62 -> 66
+87 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+65 [style = filled fillcolor= gray label = <OPER_TIER_2<BR/>'None'>]
+65 -> 87
+62 -> 65
+61 -> 62
+58 [style = filled fillcolor= gray label = <CALCULATOR<BR/>'None'>]
+58 -> 61
+88 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+60 [style = filled fillcolor= gray label = <OPER_TIER_1<BR/>'None'>]
+60 -> 88
+58 -> 60
+56 -> 58
+55 -> 56
+37 [style = filled fillcolor= gray label = <SENTENCE<BR/>'None'>]
+37 -> 55
+54 [style = filled fillcolor= yellow label = <P_COMMA<BR/>';'>]
+37 -> 54
+89 [style = filled fillcolor= yellow label = <e<BR/>'None'>]
+53 [style = filled fillcolor= gray label = <SENTENCE<BR/>'None'>]
+53 -> 89
+37 -> 53
+14 -> 37
+7 -> 14
+1 -> 7
+6 [style = filled fillcolor= yellow label = <RETURN<BR/>'rtn'>]
+1 -> 6
+5 [style = filled fillcolor= yellow label = <NUM<BR/>'3'>]
+1 -> 5
+4 [style = filled fillcolor= yellow label = <P_COMMA<BR/>';'>]
+1 -> 4
+3 [style = filled fillcolor= yellow label = <LLA_RIGHT<BR/>'}'>]
+1 -> 3
+}
