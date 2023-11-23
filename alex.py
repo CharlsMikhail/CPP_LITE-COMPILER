@@ -25,8 +25,8 @@ reserved = {
     'vd': 'TYPE_VOID',
     'els': 'ELSE',
     'elf': 'ELSE_IF',
-    'tru': 'BOOL_V',
-    'fal': 'BOOL_F',
+    'tru': 'BOOL',
+    'fal': 'BOOL',
     'rtn': 'RETURN',
     'slt': 'ENDL'
 }
@@ -124,7 +124,7 @@ lexer = lex.lex()
 
 # Give the lexer some input
 def alex():
-  with open('test/ifelse.cppl', 'r') as archivo:
+  with open('test/run.cppl', 'r') as archivo:
     contenido = archivo.read()
 
   lexer.input(contenido)
@@ -145,6 +145,8 @@ def alex():
   nuevo_token = {"symbol": "$", "lexeme": "$", "nroline": 0, "col": 0}
   lista_tokens.append(nuevo_token)
   separador = "-" * 60
+  for info_token in lista_tokens:
+    print(info_token)
   print(separador)
   print("\t\t\t\t\tCOMPILADOR CPP-LITE")
   print(separador)

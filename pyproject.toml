@@ -9,6 +9,8 @@ python = ">=3.10.0,<3.11"
 pandas = "^2.1.1"
 ply = "^3.11"
 prettytable = "^3.9.0"
+alex-junior = "^0.25"
+numpy = "^1.26.2"
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md

@@ -33,7 +33,7 @@ def buscar_nodo_por_id(root, target_id):
   return None
 
 
-tabla = pd.read_csv("gramaticaFinal.csv", index_col=0)
+tabla = pd.read_csv("GramaticaEnd.csv", index_col=0)
 count = 0
 stack = []
 
@@ -65,7 +65,7 @@ def asin():
         nodeCurrent.type = 'dbl'
       elif input_data4[0]["symbol"] == 'CHAR':
         nodeCurrent.type = 'ch'
-      elif input_data4[0]["symbol"] == ('BOOL_V' or 'BOOL_F'):
+      elif input_data4[0]["symbol"] == 'BOOL':
         nodeCurrent.type = 'bl'
       stack.pop()
       input_data4.pop(0)
