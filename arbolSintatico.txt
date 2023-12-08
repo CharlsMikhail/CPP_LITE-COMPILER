@@ -17,7 +17,7 @@ digraph G {
 19 -> 20
 16 [style = filled fillcolor= gray label = <Symbol: STATEMENT<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
 16 -> 19
-18 [style = filled fillcolor= yellow label = <Symbol: ID<BR/>Lexeme: 'a'<BR/>DataType: 'None'>]
+18 [style = filled fillcolor= yellow label = <Symbol: ID<BR/>Lexeme: 'x'<BR/>DataType: 'None'>]
 16 -> 18
 22 [style = filled fillcolor= yellow label = <Symbol: OPER_ASG<BR/>Lexeme: '='<BR/>DataType: 'None'>]
 17 [style = filled fillcolor= gray label = <Symbol: ASSIGN_VAR<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
@@ -27,16 +27,8 @@ digraph G {
 24 -> 25
 21 [style = filled fillcolor= gray label = <Symbol: CALCULATOR<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
 21 -> 24
-28 [style = filled fillcolor= yellow label = <Symbol: OPE_SUM<BR/>Lexeme: '+'<BR/>DataType: 'None'>]
+26 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
 23 [style = filled fillcolor= gray label = <Symbol: OPERATION<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
-23 -> 28
-29 [style = filled fillcolor= yellow label = <Symbol: NUM<BR/>Lexeme: '2'<BR/>DataType: 'it'>]
-27 [style = filled fillcolor= gray label = <Symbol: ARG<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
-27 -> 29
-23 -> 27
-30 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
-26 [style = filled fillcolor= gray label = <Symbol: OPERATION<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
-26 -> 30
 23 -> 26
 21 -> 23
 17 -> 21
@@ -45,14 +37,110 @@ digraph G {
 7 -> 16
 15 [style = filled fillcolor= yellow label = <Symbol: P_COMMA<BR/>Lexeme: ';'<BR/>DataType: 'None'>]
 7 -> 15
-31 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+36 [style = filled fillcolor= yellow label = <Symbol: IF<BR/>Lexeme: 'if'<BR/>DataType: 'None'>]
+28 [style = filled fillcolor= gray label = <Symbol: SENT_IF<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+28 -> 36
+35 [style = filled fillcolor= yellow label = <Symbol: PAR_LEFT<BR/>Lexeme: '('<BR/>DataType: 'None'>]
+28 -> 35
+40 [style = filled fillcolor= yellow label = <Symbol: ID<BR/>Lexeme: 'x'<BR/>DataType: 'None'>]
+38 [style = filled fillcolor= gray label = <Symbol: ARG<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+38 -> 40
+41 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+39 [style = filled fillcolor= gray label = <Symbol: INVOKER_FUNC<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+39 -> 41
+38 -> 39
+34 [style = filled fillcolor= gray label = <Symbol: CALCULATOR<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+34 -> 38
+44 [style = filled fillcolor= yellow label = <Symbol: OPE_MAY<BR/>Lexeme: '>'<BR/>DataType: 'None'>]
+37 [style = filled fillcolor= gray label = <Symbol: OPERATION<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+37 -> 44
+45 [style = filled fillcolor= yellow label = <Symbol: NUM<BR/>Lexeme: '2'<BR/>DataType: 'it'>]
+43 [style = filled fillcolor= gray label = <Symbol: ARG<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+43 -> 45
+37 -> 43
+46 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+42 [style = filled fillcolor= gray label = <Symbol: OPERATION<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+42 -> 46
+37 -> 42
+34 -> 37
+28 -> 34
+33 [style = filled fillcolor= yellow label = <Symbol: PAR_RIGHT<BR/>Lexeme: ')'<BR/>DataType: 'None'>]
+28 -> 33
+32 [style = filled fillcolor= yellow label = <Symbol: LLA_LEFT<BR/>Lexeme: '{'<BR/>DataType: 'None'>]
+28 -> 32
+51 [style = filled fillcolor= yellow label = <Symbol: ID<BR/>Lexeme: 'x'<BR/>DataType: 'None'>]
+49 [style = filled fillcolor= gray label = <Symbol: STATEMENT<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+49 -> 51
+53 [style = filled fillcolor= yellow label = <Symbol: OPER_ASG<BR/>Lexeme: '='<BR/>DataType: 'None'>]
+50 [style = filled fillcolor= gray label = <Symbol: FUNC_OR_ASSIGN<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+50 -> 53
+56 [style = filled fillcolor= yellow label = <Symbol: NUM<BR/>Lexeme: '19'<BR/>DataType: 'it'>]
+55 [style = filled fillcolor= gray label = <Symbol: ARG<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+55 -> 56
+52 [style = filled fillcolor= gray label = <Symbol: CALCULATOR<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+52 -> 55
+57 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+54 [style = filled fillcolor= gray label = <Symbol: OPERATION<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+54 -> 57
+52 -> 54
+50 -> 52
+49 -> 50
+31 [style = filled fillcolor= gray label = <Symbol: SENTENCE<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+31 -> 49
+48 [style = filled fillcolor= yellow label = <Symbol: P_COMMA<BR/>Lexeme: ';'<BR/>DataType: 'None'>]
+31 -> 48
+58 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+47 [style = filled fillcolor= gray label = <Symbol: SENTENCE<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+47 -> 58
+31 -> 47
+28 -> 31
+30 [style = filled fillcolor= yellow label = <Symbol: LLA_RIGHT<BR/>Lexeme: '}'<BR/>DataType: 'None'>]
+28 -> 30
+62 [style = filled fillcolor= yellow label = <Symbol: ELSE<BR/>Lexeme: 'els'<BR/>DataType: 'None'>]
+29 [style = filled fillcolor= gray label = <Symbol: SENT_ELSEIF_ELSE<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+29 -> 62
+61 [style = filled fillcolor= yellow label = <Symbol: LLA_LEFT<BR/>Lexeme: '{'<BR/>DataType: 'None'>]
+29 -> 61
+67 [style = filled fillcolor= yellow label = <Symbol: ID<BR/>Lexeme: 'x'<BR/>DataType: 'None'>]
+65 [style = filled fillcolor= gray label = <Symbol: STATEMENT<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+65 -> 67
+69 [style = filled fillcolor= yellow label = <Symbol: OPER_ASG<BR/>Lexeme: '='<BR/>DataType: 'None'>]
+66 [style = filled fillcolor= gray label = <Symbol: FUNC_OR_ASSIGN<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+66 -> 69
+72 [style = filled fillcolor= yellow label = <Symbol: NUM<BR/>Lexeme: '12'<BR/>DataType: 'it'>]
+71 [style = filled fillcolor= gray label = <Symbol: ARG<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+71 -> 72
+68 [style = filled fillcolor= gray label = <Symbol: CALCULATOR<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+68 -> 71
+73 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+70 [style = filled fillcolor= gray label = <Symbol: OPERATION<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+70 -> 73
+68 -> 70
+66 -> 68
+65 -> 66
+60 [style = filled fillcolor= gray label = <Symbol: SENTENCE<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+60 -> 65
+64 [style = filled fillcolor= yellow label = <Symbol: P_COMMA<BR/>Lexeme: ';'<BR/>DataType: 'None'>]
+60 -> 64
+74 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+63 [style = filled fillcolor= gray label = <Symbol: SENTENCE<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+63 -> 74
+60 -> 63
+29 -> 60
+59 [style = filled fillcolor= yellow label = <Symbol: LLA_RIGHT<BR/>Lexeme: '}'<BR/>DataType: 'None'>]
+29 -> 59
+28 -> 29
 14 [style = filled fillcolor= gray label = <Symbol: SENTENCE<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
-14 -> 31
+14 -> 28
+75 [style = filled fillcolor= yellow label = <Symbol: e<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+27 [style = filled fillcolor= gray label = <Symbol: SENTENCE<BR/>Lexeme: 'None'<BR/>DataType: 'None'>]
+27 -> 75
+14 -> 27
 7 -> 14
 1 -> 7
 6 [style = filled fillcolor= yellow label = <Symbol: RETURN<BR/>Lexeme: 'rtn'<BR/>DataType: 'None'>]
 1 -> 6
-5 [style = filled fillcolor= yellow label = <Symbol: NUM<BR/>Lexeme: '1'<BR/>DataType: 'it'>]
+5 [style = filled fillcolor= yellow label = <Symbol: NUM<BR/>Lexeme: '0'<BR/>DataType: 'it'>]
 1 -> 5
 4 [style = filled fillcolor= yellow label = <Symbol: P_COMMA<BR/>Lexeme: ';'<BR/>DataType: 'None'>]
 1 -> 4

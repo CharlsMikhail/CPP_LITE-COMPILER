@@ -1,0 +1,3 @@
+
+lw $fp 0($sp)
+jr $ra
