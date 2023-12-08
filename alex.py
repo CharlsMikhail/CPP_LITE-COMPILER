@@ -5,7 +5,6 @@
 # numbers and +,-,*,/
 # ------------------------------------------------------------
 import ply.lex as lex
-
 # r'atring' -> r significa que la cadena es tradada sin caracteres de escape,
 # es decir r'\n' seria un \ seguido de n (no se interpretaria como salto de linea)
 
@@ -145,8 +144,8 @@ def alex():
   nuevo_token = {"symbol": "$", "lexeme": "$", "nroline": 0, "col": 0}
   lista_tokens.append(nuevo_token)
   separador = "-" * 60
-  for info_token in lista_tokens:
-    print(info_token)
+  '''for info_token in lista_tokens:
+    print(info_token)'''
   print(separador)
   print("\t\t\t\t\tCOMPILADOR CPP-LITE")
   print(separador)

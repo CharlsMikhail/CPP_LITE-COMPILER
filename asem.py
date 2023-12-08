@@ -15,8 +15,6 @@ subtypes = {
 
 
 def definirTipo(tipo1, tipo2):
-  print("TIPO1: ", tipo1)
-  print("TIPO2: ", tipo2)
   if tipo1 == tipo2:
     return tipo1
 
@@ -37,9 +35,6 @@ def definirTipo(tipo1, tipo2):
 
 
 def tipo_resultante(tipo1, tipo2, operador):
-  print("tipo 1", tipo1)
-  print("tipo 2", tipo2)
-  print("operador", operador)
 
   TypeFinal = definirTipo(tipo1, tipo2)
 
@@ -72,7 +67,7 @@ class node_scope_stack:
 
   def to_list(self):
     return [
-        self.type, self.name, self.scope, self.flag, self.parm, self.idfunc
+        self.type, self.name, self.scope, self.flag, self.parm
     ]
 
 
@@ -80,7 +75,7 @@ rootP = asin.asin()
 numParms = 0
 stackScope = []
 scopeCurrent = "global"
-tabla = PrettyTable(["Type", "Name", "Scope", "Flag", "Parms", "ID Function"])
+tabla = PrettyTable(["Type", "Name", "Scope", "Flag", "Parms"])
 
 
 #FUNCIONES AUXILIARES
@@ -172,32 +167,7 @@ def genExpresion(exp):
 def genCodOperacioSuma(exp1):
   ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1) + "\nlw $t1 4($sp)\nadd $a0 $t1 $a0\naddiu $sp $sp 4")
 
-'''def getOperacion(exp1, operador):
-  print("Expresion:", exp1)
-  print("Operacion:", operador)
-  if operador == '+':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1) + "\nlw $t1 4($sp)\nadd $a0 $t1 $a0\naddiu $sp $sp 4")
-  elif operador == '-':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1) + "\nlw $t1 4($sp)\nsub $a0 $t1 $a0\naddiu $sp $sp 4")
-  elif operador == '*':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1) + "\nlw $t1 4($sp)\nmul $a0 $t1 $a0\naddiu $sp $sp 4")
-  elif operador == '/':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1) + "\nlw $t1 4($sp)\ndiv $a0 $t1 $a0\naddiu $sp $sp 4")
-  elif operador == '>':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1))
-    ouputGenerator2.write("\nlw $t1, 4($sp)\nadd $sp, $sp, 4\nble $t1, $a0, label_false")
-  elif operador == '<':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1))
-    ouputGenerator2.write("\nlw $t1, 4($sp)\nadd $sp, $sp, 4\nbge $t1, $a0, label_false")
-  elif operador == '<=':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1))
-    ouputGenerator2.write("\nlw $t1, 4($sp)\nadd $sp, $sp, 4\nbgt $t1, $a0, label_false")
-  elif operador == '>=':
-    ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(exp1))
-    ouputGenerator2.write("\nlw $t1, 4($sp)\nadd $sp, $sp, 4\nblt $t1, $a0, label_false")'''
 def getOperacion(exp1, operador):
-  print("Expresion:", exp1)
-  print("Operacion:", operador)
 
   if scopeCurrent == "run":
       output_file = ouputGenerator2
@@ -250,17 +220,27 @@ def verificarArgumentosFuncion(node, parent_symbol=None):
     for child in reversed(node.children):
       verificarArgumentosFuncion(child, node.symbol)
 
+def writeMathOperation(operator):
+  global scopeCurrent  # Asumo que scopeCurrent es una variable global
+
+  if scopeCurrent == "run":
+      output_file = ouputGenerator2
+  else:
+      output_file = ouputGenerator3
+
+  # Traducción de operadores a instrucciones MIPS
+  mips_instruction = {'+': 'add', '-': 'sub', '*': 'mul', '/': 'div'}
+
+  # Escribe las instrucciones en el archivo de salida
+  output_file.write(f"\nlw $t1, 4($sp)\n{mips_instruction[operator]} $a0, $t1, $a0\n")
 
 def verificarTiposCalculator(node, actualType):
   global numParms
   global scopeCurrent
   if node is not None:
-    ##print("SIMBOLO:", node.symbol)
     if node.symbol == "OPERATION" and node.children[-1].symbol != 'e':
       #PARENTESIS
       if node.children[-2].children[-1].symbol == 'PAR_LEFT':
-        print(actualType[-1])
-        print("ENTRE A PARENTESIS")
         ###########################################################################
         if (node.children[-2].children[-2].children[-1].children[-1].symbol ==
             'ID'):
@@ -274,7 +254,6 @@ def verificarTiposCalculator(node, actualType):
                 node.children[-2].children[-2].children[-1].children[-1].
                 lexeme, 'global', numParms)
             if (verdad_and_node == False):
-              print(numParms)
               print(
                   "\nError Semantico(ES-04-CAL-1): La Funcion '" + node.
                   children[-2].children[-2].children[-1].children[-1].lexeme +
@@ -309,27 +288,27 @@ def verificarTiposCalculator(node, actualType):
               exit(1)
             else:
               #verificar
-              getOperacion(node.children[-2].children[-2].children[-1].children[-1].
-                                 lexeme, node.children[-1].lexeme)
-              actualType[-1] = tipo_resultante(actualType[-1], IDCurrent.type,
-                                               node.children[-1].lexeme)
+              ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(node.children[-2].children[-2].children[-1].children[-1].lexeme))
+              actualType.append(IDCurrent.type)
+              verificarTiposCalculator(node.children[-2], actualType)
+              actualType.append(
+                tipo_resultante(actualType.pop(), IDCurrent.type,
+                                node.children[-1].lexeme))
+              writeMathOperation(node.children[-1].lexeme)
       ###########################################################################
         else:
-          print("HOLA;", node.children[-2].children[-2].children[-1].children[-1].lexeme)
           #verificar
           ouputGenerator2.write("\nsw $a0 0($sp)\naddiu $sp $sp-4" + genExpresion(node.children[-2].children[-2].children[-1].children[-1].lexeme))
           actualType.append(
               node.children[-2].children[-2].children[-1].children[-1].type)
           
-          print("NODO ENVIADO POR PAR", node.children[-2].symbol)
           verificarTiposCalculator(node.children[-2], actualType)
-          print("Tipo actual: ", actualType[-1])
 
           actualType.append(
               tipo_resultante(actualType.pop(), actualType[-1],
                               node.children[-1].lexeme))
-          print("Tipo actual2: ", actualType[-1])
-          print("SALI del PARENTEISSI")
+          ##ouputGenerator2.write("\naddiu $sp, $sp, 4")
+          writeMathOperation(node.children[-1].lexeme)
           #tendria que invocar a la funcion verificarTiposCalculator con el hijo[-2]
           #ademas tengo que ahora jugar con el inidice ++
           #al volver tengo que verificar con el inidice anterior, verificar tipos.
@@ -342,7 +321,6 @@ def verificarTiposCalculator(node, actualType):
           verdad_and_node = verificarExistenciaEnPila(
               node.children[-2].children[-1].lexeme, 'global', numParms)
           if (verdad_and_node == False):
-            print(numParms)
             print(
                 "\nError Semantico(ES-04-CAL-OJO): La Funcion '" +
                 node.children[-2].children[-1].lexeme +
@@ -393,6 +371,8 @@ def verificarTiposCalculator(node, actualType):
 
     for child in reversed(node.children):
       #aqui hago un que corte la rama, como hago con el operador
+      if child.symbol == 'ARG' and child.children[-1].symbol == 'PAR_LEFT':
+        continue
       verificarTiposCalculator(child, actualType)
 
 
@@ -445,12 +425,9 @@ def reconocerVariablesMain(node, parent_symbol=None):
       global stackScope
       # Verificar si es una variable que se esta definiendo: TYPE_ID
       if node.father.children[-1].symbol == "TYPE_ID":
-        print("aeaeaeaeaeaeaeasfaeaeaea")
         stackF = node_scope_stack(node.father.children[-1].children[-1].lexeme,
                                   node.lexeme, scopeCurrent, "variable")
         node.type = node.father.children[-1].children[-1].lexeme
-        print("NODE TYPE DECLARATION", node.type)
-        print("NODE LEXEME DECLARATION", node.lexeme)
         if (verificarExistenciaEnPila(stackF.name, stackF.scope) != False):
           print("\nError Semantico(ES-03): La Variable '" + stackF.name +
                 "' ya fue definida en: " + stackF.scope)
@@ -501,87 +478,12 @@ def reconocerVariablesMain(node, parent_symbol=None):
           
       ##aqui falta el caso de los parentesis. XXXXXXXXXXXXXXXXXXXX
       if node.children[-1].children[-1].symbol == 'PAR_LEFT':
-        print("hola enter a un parentesis")
-        pass
-        if (node.children[-1].children[-2].children[-1].children[-1].symbol ==
-          'ID'):
-          #INVOCACION DE FUNCIONES
-          if (node.children[-2].children[-2].children[-1].children[-2].
-              children[-1].symbol == 'PAR_LEFT'):
-            numParms = 0
-            verificarArgumentosFuncion(node.children[-2].children[-2].
-                                       children[-1].children[-2].children[-2])
-            verdad_and_node = verificarExistenciaEnPila(
-                node.children[-2].children[-2].children[-1].children[-1].
-                lexeme, 'global', numParms)
-            if (verdad_and_node == False):
-              print(numParms)
-              print(
-                  "\nError Semantico(ES-04-CAL-1): La Funcion '" + node.
-                  children[-2].children[-2].children[-1].children[-1].lexeme +
-                  "' no esta definida o no tiene el mismo número de parametros."
-              )
-              exit(1)
-            else:  # Si es asi entonces ir a RVF(node, parent);
-              scopeCurrent = node.children[-2].children[-2].children[
-                  -1].children[-1].lexeme
-              
-              reconocerParametrosFunc(verdad_and_node.children[-4])
-              reconocerVariablesFunc(verdad_and_node.children[-7])
-              if (verdad_and_node.children[-9].symbol == "CALCULATOR"):
-                reconocerVariablesReturnFunc(verdad_and_node.children[-9])
-              printStack()
-              borrarEnPila()
-              printStack()
-              scopeCurrent = 'run'
-              if (verdad_and_node.children[-1].symbol == 'TYPE_VOID'):
-                print(
-                    "\nError Semantico(ES-04-CALC-234): No se puede operar con una función tipo VOID"
-                )
-              exit(1)
-          #USO DE ID
-          else:
-            IDCurrent = verificarExistenciaEnPila(
-                node.children[-2].children[-2].children[-1].children[-1].
-                lexeme, scopeCurrent)
-            if (IDCurrent == False):
-              print("\nError Semantico(ES-05-2): La Variable '" +
-                    node.children[-2].children[-2].children[-1].children[-1].
-                    lexeme + "' no esta definida en el scope: " + scopeCurrent)
-              exit(1)
-            else:
-              #verificar
-              genCodOperacioSuma(node.children[-2].children[-2].children[-1].children[-1].
-                                 lexeme)
-              actualType[-1] = tipo_resultante(actualType[-1], IDCurrent.type,
-                                               node.children[-1].lexeme)
-          ###########################################################################
-        else:
-          print(node.children[-2].children[-2].children[-1].children[-1].type)
-          #verificar
-          genCodOperacioSuma(node.children[-2].children[-2].children[-1].children[-1].lexeme)
-          actualType.append(
-              node.children[-2].children[-2].children[-1].children[-1].type)
-  
-          print("NODO ENVIADO POR PAR", node.children[-2].symbol)
-          verificarTiposCalculator(node.children[-2], actualType)
-          print("Tipo actual: ", actualType[-1])
-  
-          actualType.append(
-              tipo_resultante(actualType.pop(), actualType[-1],
-                              node.children[-1].lexeme))
-          print("Tipo actual2: ", actualType[-1])
-          print("SALI del PARENTEISSI")
-          #tendria que invocar a la funcion verificarTiposCalculator con el hijo[-2]
-          #ademas tengo que ahora jugar con el inidice ++
-          #al volver tengo que verificar con el inidice anterior, verificar tipos.
-      ##hastsa aqui
-      #"ID Y FUNC"
+        print("Hola, aun falta ver este caso cuando el parentesis esta al INICIO(despues del =), pero es un copia y pega de lo que ya se implemento")
+        exit(1)
       elif (node.children[-1].children[-1].symbol == 'ID'):
         #INVOCACION DE FUNCIONES
         if (node.children[-1].children[-2].symbol == "INVOKER_FUNC" and
             node.children[-1].children[-2].children[-1].symbol == "PAR_LEFT"):
-          print("HOLAAAA ENTRE A INCIAL FUNCION APRA CALCULADORA")
           #global numParms
           #invocacion a una función
           ouputGenerator2.write("\nsw $fp 0($sp)\naddiu $sp $sp-4")
@@ -615,8 +517,6 @@ def reconocerVariablesMain(node, parent_symbol=None):
                   "\nError Semantico(ES-04-MAIN-2): No se puede operar con una función tipo VOID"
               )
               exit(1)
-            print("TIPO DE FUNC INCIAL:",
-                  verdad_and_node.children[-1].children[-1].lexeme)
             actualType = [verdad_and_node.children[-1].children[-1].lexeme]
             verificarTiposCalculator(node, actualType)
             node.type = actualType[-1]
@@ -631,16 +531,12 @@ def reconocerVariablesMain(node, parent_symbol=None):
                   "' no esta definida en el scope: " + scopeCurrent)
             exit(1)
           else:
-            print("LEXEMEEEEE1", node.children[-1].children[-1].lexeme)
-            print("TIPOOOOOOOOOOOO1", IDCurrent.type)
             actualType = [IDCurrent.type]
             #Generar codigo ID
             ouputGenerator2.write(genObtenerVariable(node.children[-1].children[-1].lexeme))
             verificarTiposCalculator(node, actualType)
             node.type = actualType[-1]
       else:
-        print("LEXEMEEEEE", node.children[-1].children[-1].lexeme)
-        print("TIPOOOOOOOOOOOO", node.children[-1].children[-1].type)
         actualType = [node.children[-1].children[-1].type]
         #Generar codigo EXP
         ouputGenerator2.write(genDeclararNum(node.children[-1].children[-1].lexeme))
@@ -653,30 +549,23 @@ def reconocerVariablesMain(node, parent_symbol=None):
 
         if definirTipo(node.type,
                        node.father.father.children[-2].type) != None:
-          print("HAY COMPATIBILIDAD DE DATOS")
           genAsignacion(node.father.father.children[-2].lexeme)
           #aqui falta hacer la asignacion de valores
         else:
-          print("CALC",
-                definirTipo(node.type, node.father.father.children[-2].type))
-          print("ORIGINAL", node.father.father.children[-2].type)
 
           print(
               "\nError Semantico(ES-CAL): No hay compatibilidad de datos MAIN")
           exit(1)
       elif node.father.symbol == 'FUNC_OR_ASSIGN':
         if definirTipo(node.type, idCurr.type) != None:
-          print("HAY COMPATIBILIDAD DE DATOS")
           genAsignacion(idCurr.name)
           #aqui falta hacer la asignacion de valores
         else:
-          print("CALC", definirTipo(node.type, idCurr.type))
           print(
               "\nError Semantico(ES-CAL-2): No hay compatibilidad de datos MAIN"
           )
           exit(1)
     elif node.symbol == 'LLA_LEFT' and node.father.symbol == 'SENT_IF':
-      print("HOLA YOUUTUBE")
       ouputGenerator2.write("\n\nlabel_true:")
     elif node.symbol == 'ELSE':
       ouputGenerator2.write("\n\nlabel_false:")
@@ -790,16 +679,12 @@ def reconocerVariablesReturnFunc(node, parent_symbol=None):
                   "' no esta definida en el scope: " + scopeCurrent)
             exit(1)
           else:
-            print("LEXEMEEEEE1", node.children[-1].children[-1].lexeme)
-            print("TIPOOOOOOOOOOOO1", IDCurrent.type)
             actualType = [IDCurrent.type]
             #aqui un for para el offset de los  params
             ouputGenerator3.write("\nlw $a0, 8($sp)")
             verificarTiposCalculator(node, actualType)
             node.type = actualType[-1]
       else:
-        print("LEXEMEEEEE", node.children[-1].children[-1].lexeme)
-        print("TIPOOOOOOOOOOOO", node.children[-1].children[-1].type)
         actualType = [node.children[-1].children[-1].type]
         ouputGenerator2.write("\nINICIA EXPRESIÓN")
         verificarTiposCalculator(node, actualType)
@@ -808,8 +693,7 @@ def reconocerVariablesReturnFunc(node, parent_symbol=None):
       if node.father.symbol == 'FUNC':
         if definirTipo(node.type,
                        node.father.children[-1].children[-1].lexeme) != None:
-          print("HAY COMPATIBILIDAD DE DATOS")
-          #aqui falta hacer la asignacion de valores
+          pass
         else:
           print(
               "\nError Semantico(ES-CAL): No hay compatibilidad de datos -> RETURN"
@@ -817,10 +701,9 @@ def reconocerVariablesReturnFunc(node, parent_symbol=None):
           exit(1)
       elif node.father.symbol == 'FUNC_OR_ASSIGN':
         if definirTipo(node.type, idCurr.type) != None:
-          print("HAY COMPATIBILIDAD DE DATOS")
           #aqui falta hacer la asignacion de valores
+          pass
         else:
-          print("CALC", definirTipo(node.type, idCurr.type))
           print(
               "\nError Semantico(ES-CAL-2): No hay compatibilidad de datos -> RETURN"
           )
@@ -872,7 +755,6 @@ def reconocerVariablesFunc(node, parent_symbol=None):
       else:
         pass
     elif (node.symbol == 'CALCULATOR' and node.father.symbol != 'ARG'):
-      print("jajajajajajajajajajajajajjaja")
       idCurr = None
       if (node.father.symbol == 'FUNC_OR_ASSIGN'):
         idCurr = verificarExistenciaEnPila(
@@ -924,14 +806,10 @@ def reconocerVariablesFunc(node, parent_symbol=None):
                   "' no esta definida en el scope: " + scopeCurrent)
             exit(1)
           else:
-            print("LEXEMEEEEE1", node.children[-1].children[-1].lexeme)
-            print("TIPOOOOOOOOOOOO1", IDCurrent.type)
             actualType = [IDCurrent.type]
             verificarTiposCalculator(node, actualType)
             node.type = actualType[-1]
       else:
-        print("LEXEMEEEEE", node.children[-1].children[-1].lexeme)
-        print("TIPOOOOOOOOOOOO", node.children[-1].children[-1].type)
         actualType = [node.children[-1].children[-1].type]
         verificarTiposCalculator(node, actualType)
         node.type = actualType[-1]
@@ -939,18 +817,17 @@ def reconocerVariablesFunc(node, parent_symbol=None):
       if node.father.symbol == 'ASSIGN_VAR':
         if definirTipo(node.type,
                        node.father.father.children[-2].type) != None:
-          print("HAY COMPATIBILIDAD DE DATOS")
           #aqui falta hacer la asignacion de valores
+          pass
         else:
           print(
               "\nError Semantico(ES-CAL): No hay compatibilidad de datos FUNC")
           exit(1)
       elif node.father.symbol == 'FUNC_OR_ASSIGN':
         if definirTipo(node.type, idCurr.type) != None:
-          print("HAY COMPATIBILIDAD DE DATOS")
+          pass
           #aqui falta hacer la asignacion de valores
         else:
-          print("CALC", definirTipo(node.type, idCurr.type))
           print(
               "\nError Semantico(ES-CAL-2): No hay compatibilidad de datos FUNC"
           )

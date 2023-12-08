@@ -1,0 +1,34 @@
+Ejemplos(COMPILER C++Lite):
+
+
+#OPERACION ARITMETICA:
+run() {
+  it h = 10;
+  it x = 2 + h + (h / 2);
+  rtn 0;
+}
+
+
+#IF-ELSE:
+run() {
+  it x = 1;
+  if (x > 2) {
+    x = 19;
+  } els {
+    x = 12;
+  }
+  rtn 0;
+}
+
+
+#FUNCION:
+it f1 (it p) {   
+   rtn p + 10;
+} 
+
+run( ) { 
+  it x;
+  x = f1(5);
+  rtn 0;
+}
+
